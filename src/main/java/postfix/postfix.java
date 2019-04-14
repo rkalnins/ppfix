@@ -4,7 +4,13 @@ import java.util.*;
 public class postfix{
     public static void main(String[] args){
         PostfixEvaluator ppfix = new PostfixEvaluator();
-        System.out.println(ppfix.evaluate(args.toString()));
+        Scanner in = new Scanner(System.in);
+        ArrayList<String> inputs = new ArrayList<>();
+        String[]  inpu = in.nextLine().split(" ");
+        for(String s: inpu){
+            inputs.add(s);
+        }
+        System.out.println(ppfix.evaluate(inputs));
     }
 }
 class PostfixEvaluator {
@@ -17,13 +23,12 @@ class PostfixEvaluator {
         stack = new Stack<Double>();
     }
 
-    public double evaluate(String postfix)
+    public double evaluate(ArrayList<String> inputs)
     {
-        Scanner scan = new Scanner(postfix);
-
-        while ( scan.hasNext() )
+        int cur = 0;
+        while ( cur < inputs.size())
         {
-            String symbol = scan.next();
+            String symbol = inputs.get(cur);
 
             if (!OPERATORS.contains(symbol))
             {
@@ -46,6 +51,7 @@ class PostfixEvaluator {
                 else
                     stack.push(opnd1 - opnd2);
             }
+            cur++;
         }
         return stack.pop();
     }
