@@ -1,13 +1,13 @@
 
 import java.util.*;
 
-public class postfix{
+public class Driver{
     public static void main(String[] args){
         PostfixEvaluator ppfix = new PostfixEvaluator();
-        Scanner in = new Scanner(System.in);
+//        Scanner in = new Scanner(System.in);
         ArrayList<String> inputs = new ArrayList<>();
-        String[]  inpu = in.nextLine().split(" ");
-        for(String s: inpu){
+//        String[]  inpu = in.nextLine().split(" ");
+        for(String s: args){
             inputs.add(s);
         }
         System.out.println(ppfix.evaluate(inputs));
