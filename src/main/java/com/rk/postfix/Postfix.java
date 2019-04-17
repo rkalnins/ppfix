@@ -22,7 +22,7 @@ public class Postfix {
     while (cur < arg.length) {
 
       String symbol = arg[cur];
-g
+
       if (!OPERATORS.contains(symbol)) {
         double number = Double.valueOf(symbol);
         stack.push(number);
