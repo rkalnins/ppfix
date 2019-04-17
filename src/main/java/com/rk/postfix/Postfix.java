@@ -1,6 +1,8 @@
 package com.rk.postfix;
 
-import java.util.Scanner;
+import kotlin.NotImplementedError;
+
+import java.util.List;
 import java.util.Stack;
 
 public class Postfix {
@@ -9,28 +11,45 @@ public class Postfix {
   private Stack<Double> stack;
 
   public Postfix() {
-    stack = new Stack<Double>();
+    stack = new Stack<>();
   }
 
-  public double evaluate(String postfix) {
-    Scanner scan = new Scanner(postfix);
+  public double evaluate(List<String> inputs) {
 
-    while (scan.hasNext()) {
-      String symbol = scan.next();
+    String[] arg = inputs.get(0).split(" ");
+    int cur = 0;
 
+    while (cur < arg.length) {
+
+      String symbol = arg[cur];
+g
       if (!OPERATORS.contains(symbol)) {
-        double number = Double.parseDouble(symbol);
+        double number = Double.valueOf(symbol);
         stack.push(number);
       } else {
         double opnd2 = stack.pop();
         double opnd1 = stack.pop();
 
-        if (symbol.equals("^")) stack.push(Math.pow(opnd1, opnd2));
-        else if (symbol.equals("*")) stack.push(opnd1 * opnd2);
-        else if (symbol.equals("/")) stack.push(opnd1 / opnd2);
-        else if (symbol.equals("+")) stack.push(opnd1 + opnd2);
-        else stack.push(opnd1 - opnd2);
+        switch (symbol) {
+          case "^":
+            stack.push(Math.pow(opnd1, opnd2));
+            break;
+          case "*":
+            stack.push(opnd1 * opnd2);
+            break;
+          case "/":
+            stack.push(opnd1 / opnd2);
+            break;
+          case "+":
+            stack.push(opnd1 + opnd2);
+            break;
+          case "-":
+            stack.push(opnd1 - opnd2);
+          default:
+            throw new NotImplementedError();
+        }
       }
+      cur++;
     }
     return stack.pop();
   }

@@ -39,26 +39,27 @@ class Prefix {
                             "-" -> a - b
                             "*" -> a * b
                             "/" -> a / b
-                            else -> throw TODO()
+                            else -> throw TODO("Unsupported operation")
                         }
                     )
                 }
             }
         }
 
-        return stack.last()
+        return stack.checkLast()
     }
 
-
-    private fun MutableList<Double>.pop(): Double {
-        return removeAt(this.lastIndex)
+    private fun MutableList<Double>.checkLast(): Double {
+        return if (size == 1) {
+            last()
+        } else {
+            throw IllegalArgumentException("No operator provided")
+        }
     }
 
-    private fun Double.isNegative(): Boolean {
-        return this < 0
-    }
+    private fun MutableList<Double>.pop(): Double = removeAt(lastIndex)
 
-    private fun String.isNumber(): Boolean {
-        return matches(regex = "-?\\d+(\\.\\d+)?".toRegex())
-    }
+    private fun Double.isNegative(): Boolean = this < 0
+
+    private fun String.isNumber(): Boolean = matches(regex = "-?\\d+(\\.\\d+)?".toRegex())
 }

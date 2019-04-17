@@ -10,7 +10,7 @@ fun main(args: Array<String>) {
     println(
         when (args[0]) {
             "-n" -> prefix.evaluate(args.drop(1))
-            "-r" -> postfix.evaluate(args.drop(1).toString())
+            "-r" -> postfix.evaluate(args.drop(1))
             else -> "Invalid option"
         }
     )
